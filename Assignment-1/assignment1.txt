@@ -1,0 +1,8 @@
+ASSIGNMENT 1
+
+1.IP Address        :   192.168.0.116
+2.Subnet Mask       :   255.255.255.0
+3.Network Address   :   192.168.0.0
+4.Broadcast Address :   192.168.0.255
+5.Total number of end devices that my network can support is:
+       (2^8)-2 = 254
