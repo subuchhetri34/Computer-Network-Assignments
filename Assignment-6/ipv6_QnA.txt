@@ -1,0 +1,50 @@
+Assignmnet 6
+
+1. How long is an IPv6?
+-> The IPv6 header is 40 bytes long.The IPv6 header has a fixed length unlike IPv4 header which simplifies processing by network devices.
+
+2. What are the different fields on header?what is the purpose of each header fields? 
+-> The different IPv6 header fields and their purposes are as follows:
+    a. Version (4 bits):
+       Purpose: Identifies the version of the IP protocol. For IPv6, this field is always set to 6.
+    b.Traffic Class (8 bits):
+      Purpose: Used for QoS (Quality of Service) to differentiate and prioritize types of traffic. It can indicate the priority of the packet and manage traffic congestion.
+    c.Flow Label (20 bits):
+      Purpose: Used to label packets belonging to the same flow, which require special handling by routers, such as real-time service or resource reservation.
+    d.Payload Length (16 bits):
+      Purpose: Specifies the length of the payload, including any extension headers, in bytes. It does not include the 40-byte base header.Maximum value is 65,535 bytes.
+    e.Next Header (8 bits):
+      Purpose: Identifies the type of header immediately following the IPv6 header. This could be an upper-layer protocol (like TCP, UDP) or an extension header (such as Routing, Fragmentation, or Destination Options).Values correspond to different protocols and extension headers, similar to the Protocol field in IPv4.
+    f.Hop Limit (8 bits):
+      Purpose: Similar to the TTL (Time to Live) field in IPv4, this field specifies the maximum number of hops the packet can traverse. Each router that forwards the packet decrements this value by one, and the packet is discarded when it reaches zero.
+    g.Source Address (128 bits / 16 bytes):
+      Purpose: The IPv6 address of the originating node, indicating where the packet is coming from.
+    h.Destination Address (128 bits / 16 bytes):
+      Purpose: The IPv6 address of the destination node, indicating where the packet is headed
+
+3. In wireshark,locate an IPv6 packet and discuss the header fields.
+-> IPv6 header fields with their value adn purpose are:
+    a.Version(4 bits)
+     Value: 6/0110
+     Purpose: Indicates the IP version, which is IPv6 in this case.
+    b.Traffic Class (8 bits)
+      Value: 0x00 (DSCP: CS0, ECN: Not-ECT)
+      Purpose: Used for QoS (Quality of Service) to differentiate and prioritize types of traffic.
+    c.Flow Label (20 bits)
+      Value: 0x5f9a9 (393481 in decimal)
+      Purpose: Used to label packets belonging to the same flow, which require special handling by routers, such as real-time service or resource reservation.
+    d.Payload Length (16 bits)
+      Value: 76
+      Purpose: Specifies the length of the payload, including any extension headers, in bytes. It does not include the 40-byte base header.
+    e.Next Header (8 bits)
+      Value: 17 (UDP)
+      Purpose: Identifies the type of header immediately following the IPv6 header. In this case, it's UDP.
+    f.Hop Limit (8 bits)
+      Value: 1
+      Purpose: Specifies the maximum number of hops the packet can traverse. Each router that forwards the packet decrements this value by one, and the packet is discarded when it reaches zero.  
+    g.Source Address (128 bits / 16 bytes)
+      Value: fe80::4319:9907:3fc7:9fa4
+      Purpose: The IPv6 address of the originating node.
+    h.Destination Address (128 bits / 16 bytes)
+      Value: ff02::fb
+      Purpose: The IPv6 address of the destination node.
