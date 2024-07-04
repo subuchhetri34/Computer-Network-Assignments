@@ -1,0 +1,58 @@
+Capturing my ip address in wireshark
+IP address : 192.168.100.9
+
+Question: What is the value for each of the header fields?Describe each fields.
+
+--> The key header fields for IPv4 packet are as follows:
+
+1. Version : 4 bits
+   Value: 0100
+   Description: This indicates the version of the IP protocol. In this case, it's IPv4.
+
+2. Header Length (20 bytes)
+   Value: 5
+   Description: This specifies the length of the IP header. The value 5 means 5 * 4 = 20 bytes.
+
+3. Differentiated Services Field
+   Value: 0x00
+   Description: This field is used for Quality of Service (QoS).Differentiated Services Codepoint (DSCP): CS0 (Class Selector 0)
+   Explicit Congestion Notification (ECN): Not-ECT (Not ECN-Capable Transport).
+
+4. Total Length 
+   Value: 40 bytes
+   Description: Total length of the IP packet, including the header and data, in bytes.
+
+5. Identification
+   Value: 0x39f7 (14839)
+   Description: This is an identification field primarily used for uniquely identifying the group of fragments of a single IP datagram.
+
+6.Flags
+  Value: 0x2 (Don't fragment)
+  Description: This field is 3 bits long and is used to control or identify fragments.
+  - Bit 0: Reserved; must be zero.
+  - Bit 1: Don't fragment (1 = Set, 0 = Not set)
+  - Bit 2: More fragments (1 = More fragments, 0 = Last fragment)
+ 
+7.Fragment Offset
+  Value: 0
+  Description: This field specifies the offset of a fragment relative to the beginning of the original unfragmented IP datagram.Zero means it is not fragmented.Measured in 8-byte units.
+
+8. Time to Live (TTL)
+   Value: 128
+   Description: This field limits the lifespan of the packet. It is decremented by each router it passes through, and the packet is discarded when TTL reaches zero.
+
+9. Protocol
+   Value: TCP (6)
+   Description: This field indicates the protocol used in the data portion of the IP datagram. 6 signifies TCP
+
+10. Header Checksum
+    Value: 0x777d (validation disabled)
+    Description: This field is used for error-checking the header. If the checksum does not match, the packet is discarded.
+
+11. Source Address
+    Value: 192.168.100.9
+    Description: The IP address of the originating device(source host).
+
+12. Destination Address
+    Value: 192.168.100.1
+    Description: The IP address of the receiving device(destination host).
