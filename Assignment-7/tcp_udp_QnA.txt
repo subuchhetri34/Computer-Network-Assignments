@@ -103,8 +103,8 @@ Assignment 7
        Value: 7477
        Description: If the ACK flag is set, this field contains the value of the next sequence number that the sender is expecting to receive, thus acknowledging receipt of all prior bytes.
     e. Data Offset
-       Value: 5  
-       Description: This field specifies the size of the TCP header in 32-bit words. The value 5 indicates a 20-byte header length, meaning no additional options are present.
+       Value: 20 bytes (5)
+       Description: This field specifies the size of the TCP header in 32-bit words. The value 5 indicates a 20-bytes header length, meaning no additional options are present.
     f. Flags
        Value: 0x019
        Description: This field includes several control flags:
