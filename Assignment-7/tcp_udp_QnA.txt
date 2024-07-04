@@ -1,0 +1,129 @@
+Assignment 7
+
+1. What is the value of prefix in link local address format?
+-> In IPv6, a link-local address is a type of address that is used for communication within a single network segment (local link). The prefix for an IPv6 link-local address is FE80::/10.
+  -FE80:: represents the first 10 bits of the address
+  -The /10 notation indicates that the first 10 bits of the address are fixed and define the link-local prefix.
+  -remaining bits in the address (118 bits) are used for interface identifiers
+  Example: FE80::1, FE80::20D:B9FF:FE44:5567 ,any address starting with FE80 and followed by HEX digits upto full 128 bit length
+
+
+2. What is the size of UDP header?What are the different fields?Describe its fields.
+-> The size of UDP header is 8 bytes(64 bits).
+   The UDP header consists of four fields,consisting of:
+   a. Source Port:
+      Size: 2 bytes (16 bits).
+	  Description: This is the port number of the sending device. It's used to identify the application or process that sent the data. If the source port is not required, it can be set to zero.
+    b. Destination Port:
+ 	   Size: 2 bytes (16 bits).
+       Description: This is the port number of the receiving device. It tells the network where to deliver the data on the receiving end.
+    c. Length:
+       Size: 2 bytes (16 bits).
+       Description: This field specifies the length of the entire UDP packet, including both the header and the data. The minimum value is 8 bytes, which is the size of the header itself.
+    d. Checksum:
+       Size: 2 bytes (16 bits).
+       Description: The checksum is used for error-checking of the header and data. If the checksum is not used, this field is set to zero.
+
+
+3.  Locate an UDP packet in wireshark and relate the values with the fields.
+-> Located UDP packet in wireshark and here are the values of the fields.
+    a. Source Port
+       Value: Port 443
+       Description: This field indicates the port number of the sending application. Port 443 is typically used for HTTPS traffic, indicating that the sending application might be a web server or a service using HTTPS.
+    b. Destination Port
+       Value: Port 59566
+       Description: This field specifies the port number of the receiving application. Port 59566 is dynamically assigned, suggesting that it could be an ephemeral port used by a client application.
+    c. Length
+       Value: 33 bytes
+       Description: This field specifies the total length of the UDP packet, including the header and the data. The value 33 indicates that the entire UDP packet is 33 bytes long.
+    d. Checksum
+       Value: 0x6658 (unverified)
+       Description: This field is used for error-checking the header and data. The checksum helps verify the integrity of the UDP packet. In the screenshot, the status is "unverified," indicating that Wireshark has not verified the checksum value against the packet contents.
+
+
+4. What is the size of TCP header?What are the different fields?Describe its fields.
+-> The TCP (Transmission Control Protocol) header has a minimum size of 20 bytes (160 bits). However, the size can increase if options are  included, up to a maximum size of 60 bytes (480 bits). 
+    The basic TCP header consists of the following fields:
+    a. Source Port
+       Size: 2 bytes (16 bits)
+       Description: This field specifies the port number of the sending application.
+    b. Destination Port:
+       Size: 2 bytes (16 bits)
+       Description: This field specifies the port number of the receiving application.
+    c. Sequence Number:
+       Size: 4 bytes (32 bits)
+       Description: This field contains the sequence number of the first byte of data in this segment. If the SYN flag is set, the sequence number is the initial sequence number (ISN) and the first byte of data is ISN+1.
+    d. Acknowledgment Number:
+       Size: 4 bytes (32 bits)
+       Description: If the ACK flag is set, this field contains the value of the next sequence number that the sender is expecting to receive, thus acknowledging receipt of all prior bytes.
+    e. Data Offset:
+       Size: 4 bits
+       Description: This field specifies the size of the TCP header in 32-bit words. It indicates where the data begins. The minimum value is 5 (for a 20-byte header) and the maximum is 15 (for a 60-byte header).
+    f. Reserved:
+       Size: 3 bits
+       Description: Reserved for future use and should be set to zero.
+    g. Flags:
+       Size: 9 bits
+       Description: These are control flags that indicate the state of the connection or control functions:
+         URG: Urgent Pointer field significant
+         ACK: Acknowledgment field significant
+         PSH: Push Function
+         RST: Reset the connection
+         SYN: Synchronize sequence numbers
+         FIN: No more data from sender
+    h. Window:
+       Size: 2 bytes (16 bits)
+       Description: This field specifies the size of the sender's receive window (buffer space available). It is used for flow control.
+    i. Checksum:
+       Size: 2 bytes (16 bits)
+       Description: This field is used for error-checking of the header and data. It ensures data integrity.
+    j. Urgent Pointer:
+       Size: 2 bytes (16 bits)
+       Description: If the URG flag is set, this field indicates the offset from the sequence number where the urgent data ends.
+    k. Options:
+       Size: Variable (up to 40 bytes)
+       Description: These are optional fields that may be used for various purposes such as setting the maximum segment size (MSS), window scaling, timestamp, etc. The length of the options field varies, and it is padded with zeros to ensure the header length is a multiple of 32 bits.
+    l. Padding:
+       Size: Variable.
+       Description: Used to ensure the header is a multiple of 32 bits. It consists of zeros.
+
+
+5. Locate an TCP packet in wireshark and relate the values with the fields.
+->  Located TCP packet in wireshark and here are the values of the fields.  
+    a. Source Port
+       Value: Port 443
+       Description: This field indicates the port number of the sending application. Port 443 is typically used for HTTPS traffic.
+    b. Destination Port
+       Value: Port 59519
+       Description: This field specifies the port number of the receiving application. Port 59519 is dynamically assigned, suggesting that it could be an ephemeral port used by a client application.
+    c. Sequence Number
+       Value: 1159505695
+       Description: This field contains the sequence number of the first byte of data in this segment. It is used for data ordering and tracking.
+    d. Acknowledgment Number
+       Value: 7477
+       Description: If the ACK flag is set, this field contains the value of the next sequence number that the sender is expecting to receive, thus acknowledging receipt of all prior bytes.
+    e. Data Offset
+       Value: 5  
+       Description: This field specifies the size of the TCP header in 32-bit words. The value 5 indicates a 20-byte header length, meaning no additional options are present.
+    f. Flags
+       Value: 0x019
+       Description: This field includes several control flags:
+        FIN: Indicates the sender has finished sending data.
+        PSH: Indicates the receiver should pass the data to the application as soon as possible.
+        ACK: Indicates that the Acknowledgment field is significant
+    g. Window Size
+       Value: 16386
+       Description: This field specifies the size of the sender's receive window (buffer space available), used for flow control. The value 16386 indicates the number of bytes the sender is willing to receive.
+    h. Checksum 
+       Value: unverified
+       Description: This field is used for error-checking of the header and data. The status "unverified" means that Wireshark has not checked the checksum value against the packet contents in this capture.
+    i. Urgent Pointer
+       Value: 0  (not used)
+       Description: This field is used when the URG flag is set to indicate a specific location in the data that is urgent. The value 0 means there is no urgent data.
+    j. Options
+       Value: none
+       Description: Since the header length is 20 bytes (data offset of 5), there are no options present in this TCP segment.
+
+
+
+
