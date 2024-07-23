@@ -1,0 +1,75 @@
+Q1. In programming language of your choice, write a web application that allows you to upload a file.
+
+Q2.While uploading a file,capture the traffic in wireshark.
+
+Q3.Foloow the TCP stream and explain connection initiation,connection maintenance and connection termination.
+->
+  A. Connection Initiation
+     Objective: To identify the TCP handshake that establishes the connection between the client and server.
+     Steps:
+     i.Find the SYN Packet:
+       - Look for a packet with the SYN flag set. This is typically the first packet sent by the client to initiate the connection.
+       - Example Packet Details:
+         Flags: SYN
+         Sequence Number: X
+     ii. Find the SYN-ACK Packet:
+         -Find the packet with both SYN and ACK flags set. This is the server's response to the client's SYN request.
+         - Example Packet Details:
+             Flags: SYN, ACK
+             Sequence Number: Y
+             Acknowledgment Number: x + 1 (acknowledges the client's SYN)
+     iii. Find the ACK Packet:
+         - Look for the final packet in the handshake with the ACK flag set. This is sent by the client to acknowledge the server's SYN-ACK.
+         - Example Packet Details:
+             Flags: ACK
+             Sequence Number: X + 1
+             Acknowledgment Number: Y + 1 (acknowledges the server's SYN)
+
+
+   B. Connection Maintenance
+      Objective: To analyze the data transfer and how TCP maintains the connection.
+      Steps:
+      i. Identify Data Packets:
+         - Look at the TCP packets with the PSH (Push) flag set, which indicates data being pushed to the application layer.
+         - Example Packet Details:
+            Flags: PSH, ACK
+            Sequence Number: This is the starting byte of the data segment.
+            Acknowledgment Number: Indicates the next expected byte from the other side.
+     ii. Check Flow Control:
+         - Observe the window size in the TCP header to understand how much data the receiver is willing to accept.
+         - Example Field:
+            Window Size: Indicates the amount of buffer space available.
+    iii. Monitor Congestion Control:
+         - Look for signs of congestion control mechanisms like Slow Start or Congestion
+         - Avoidance in TCP headers, though detailed congestion control analysis may
+         require deeper inspection of the TCP behavior over time.
+     iv.  Check Keep-Alive Packets (Optional):
+          - If configured, check for occasional TCP keep-alive packets sent to ensure the connection remains active.
+         - Example Packet Details:
+            Flags: ACK (with no payload)
+        
+  C. Connection termination
+     Objective: To identify the sequence of packets that close the TCP connection
+     Steps:
+    i. Find the FIN Packet:
+       - Look for a packet with the FIN flag set. This indicates that one side wants to close the connection.
+       - Example Packet Details:
+            Flags: FIN
+            Sequence Number: U
+    ii. Find the ACK Packet:
+        - Locate the packet that acknowledges the FIN request from the other side.
+        - Example Packet Details:
+            Flags: ACK
+            Acknowledgment Number: u 1 1 (acknowledges the FIN)
+        iii. Find the Second FIN Packet:
+             - The side that acknowledged the initial FIN now sends its own FIN packet to close its side of the connection.
+            - Example Packet Details:
+                Flags: FIN
+                Sequence Number: w
+        iv. Find the Final ACK Packet:
+            - Look for the final ACK packet that acknowledges the second FIN request.
+            - Example Packet Details:
+                    Flags: ACK
+                    Acknowledgment Number: W + 1
+
+.
