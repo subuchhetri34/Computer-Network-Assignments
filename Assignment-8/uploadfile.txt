@@ -1,6 +1,8 @@
 Q1. In programming language of your choice, write a web application that allows you to upload a file.
+-> code in web-application folder
 
 Q2.While uploading a file,capture the traffic in wireshark.
+->
 
 Q3.Foloow the TCP stream and explain connection initiation,connection maintenance and connection termination.
 ->
@@ -72,4 +74,3 @@ Q3.Foloow the TCP stream and explain connection initiation,connection maintenanc
                     Flags: ACK
                     Acknowledgment Number: W + 1
 
-.
